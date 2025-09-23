@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicaNobaMVC", "MusicaNobaMVC.csproj", "{224928D9-76DB-44C9-B18C-0F9FA0CBE196}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{224928D9-76DB-44C9-B18C-0F9FA0CBE196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{224928D9-76DB-44C9-B18C-0F9FA0CBE196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{224928D9-76DB-44C9-B18C-0F9FA0CBE196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{224928D9-76DB-44C9-B18C-0F9FA0CBE196}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E05DD61-1D0D-4300-99D6-6B6F95AFF020}
+	EndGlobalSection
+EndGlobal

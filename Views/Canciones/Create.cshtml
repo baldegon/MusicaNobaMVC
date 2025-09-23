@@ -1,0 +1,43 @@
+﻿@model MusicaNobaMVC.Models.Cancion;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form asp-controller="Canciones" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Artista" class="form-label"></label>
+        <input asp-for="Artista" class="form-control" />
+        <span asp-validation-for="Artista" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+    <label asp-for="AlbumId" class="form-label">Álbum</label>
+    <select asp-for="AlbumId" class="form-select" asp-items="@(ViewData["AlbumId"] as SelectList)">
+        <option value="">-- Seleccione un álbum --</option>
+    </select>
+    <span asp-validation-for="AlbumId" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="GeneroId" class="form-label">Género</label>
+    <select asp-for="GeneroId" class="form-select" asp-items="@(ViewData["GeneroId"] as SelectList)">
+        <option value="">-- Seleccione un género --</option>
+    </select>
+    <span asp-validation-for="GeneroId" class="text-danger"></span>
+</div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
