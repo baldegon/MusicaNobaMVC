@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicaNobaMVC", "MusicaNobaMVC.csproj", "{224928D9-76DB-44C9-B18C-0F9FA0CBE196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicaNobaMVC", "MusicaNobaMVC.csproj", "{224928D9-76DB-44C9-B18C-0F9FA0CBE196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MusicaNobaMVC.Models.Cancion>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+    <a asp-action="Index">Song Dashboard</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artista)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Album)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artista)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Album.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero.IdGenero)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCancion">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCancion">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

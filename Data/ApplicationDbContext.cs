@@ -20,7 +20,7 @@ namespace MusicaNobaMVC.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+            /*
             modelBuilder.Entity<Genero>(tb =>
             {
                 tb.HasData(
@@ -49,23 +49,30 @@ namespace MusicaNobaMVC.Data
                     );
             });
 
+            modelBuilder.Entity<Cancion>()
+                .HasIndex(c => new { c.AlbumId, c.GeneroId, c.Nombre });
+
+            */
 
 
             modelBuilder.Entity<Cancion>()
                 .HasOne(c => c.Album)
                 .WithMany(a => a.Canciones)
                 .HasForeignKey(c => c.AlbumId)
+                .HasPrincipalKey(c => c.IdAlbum)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Genero>()
+                .HasKey(g => g.IdGenero);
             
             modelBuilder.Entity<Cancion>()
                 .HasOne(c => c.Genero)
                 .WithMany(g => g.Canciones)
                 .HasForeignKey(c => c.GeneroId)
+                .HasPrincipalKey(c => c.IdGenero)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Cancion>()
-                .HasIndex(c => new { c.AlbumId, c.GeneroId, c.Nombre });
-
+            
         }
 
 

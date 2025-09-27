@@ -20,9 +20,13 @@
 
     <div class="mb-3">
     <label asp-for="AlbumId" class="form-label">Álbum</label>
-    <select asp-for="AlbumId" class="form-select" asp-items="@(ViewData["AlbumId"] as SelectList)">
-        <option value="">-- Seleccione un álbum --</option>
-    </select>
+        <input asp-for="Artista" class="form-control" />
+        <!--
+
+        <select asp-for="AlbumId" class="form-select" asp-items="@(ViewData["AlbumId"] as SelectList)">
+            <option value="">-- Seleccione un álbum --</option>
+        </select>
+        -->
     <span asp-validation-for="AlbumId" class="text-danger"></span>
 </div>
 
@@ -34,10 +38,20 @@
     <span asp-validation-for="GeneroId" class="text-danger"></span>
 </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary m-3" onclick="sweetalert2()">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary">Volver</a>
 </form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        function sweetalert2(){
+            Swal.fire({
+                title: "Agregado!",
+                icon: "success",
+                draggable: true
+            });
+        }
+    </script>
 }

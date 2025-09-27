@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<!--
+
+<div class="form-floating mb-3" >
+    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+    <label asp-for="Input.ConfirmPassword" >Confirm Password</label>
+    <span asp-validation-for="Input.ConfirmPassword" class="text-danger" ></span>
+</div>
+
+@if (User.IsInRole(Rol.Administrador))
+{
+    <div class="form-group row" >
+        <div class="col-6">Seleccionar Rol de Usuario</div>
+        <div class="col-5">
+            <input type="radio" name="radUsuarioRole" value="Rol.Administrador" /> @Rol.Administrador
+            <input type="radio" name="radUsuarioRole" value="Rol.Registrado" /> @Rol.Registrado
+        </div>
+    </div>
+}
+
+<button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registro</button>
+-->
+
+@{
+}

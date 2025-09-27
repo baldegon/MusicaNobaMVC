@@ -39,7 +39,35 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdCancion" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <button type="submit" class="btn btn-primary" onclick="sweetalert2()">Borrar</button>
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+
+        function sweetalert2() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        }
+    </script>
+}

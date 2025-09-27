@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th>
@@ -48,9 +48,49 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdCancion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCancion">Delete</a>
+                <!--
+
+                <a asp-action="Delete" asp-route-id="@item.IdCancion" onclick="sweetalert2()">Delete</a>
+                <button type="submit" asp-action-id="@item.IdCancion" class="btn btn-primary" onclick="sweetalert2()">Borrar</button>
+                -->
+                <form asp-action="Delete" asp-route-id="@item.IdCancion" onclick="sweetalert2()">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+
+                </form>
+
+
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+
+        function sweetalert2() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+            e.preventDefault();
+        }
+    </script>
+}

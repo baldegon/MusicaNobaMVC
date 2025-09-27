@@ -55,7 +55,7 @@ namespace MusicaNobaMVC.Controllers
         // GET: Canciones/Create
         public async Task<IActionResult> Create()
         {
-            ViewData["AlbumId"] = new SelectList(await _context.Albums.OrderBy(a => a.Titulo).ToListAsync(), "IdAlbum", "Titulo");
+            //ViewData["AlbumId"] = new SelectList(await _context.Albums.OrderBy(a => a.Titulo).ToListAsync(), "IdAlbum", "Titulo");
             ViewData["GeneroId"] = new SelectList(await _context.Generos.OrderBy(g => g.Nombre).ToListAsync(), "IdGenero", "Nombre");
 
             return View(new Cancion());
@@ -70,8 +70,10 @@ namespace MusicaNobaMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewData["AlbumId"] = new SelectList(_context.Albums, "IdAlbum", "Titulo", cancion.AlbumId);
-                ViewData["GeneroId"] = new SelectList(_context.Generos, "IdGenero", "Nombre", cancion.GeneroId);
+                //ViewData["AlbumId"] = new SelectList(await _context.Albums.OrderBy(a => a.Titulo).ToListAsync(), "IdAlbum", "Titulo");
+                ViewData["GeneroId"] = new SelectList(await _context.Generos.OrderBy(g => g.Nombre).ToListAsync(), "IdGenero", "Nombre");
+                //ViewData["AlbumId"] = new SelectList(_context.Albums, "IdAlbum", "Titulo", cancion.AlbumId);
+                //ViewData["GeneroId"] = new SelectList(_context.Generos, "IdGenero", "Nombre", cancion.GeneroId);
                 return View(cancion);       // OK: Cancion -> Create.cshtml (Cancion)
             }
 
@@ -81,10 +83,15 @@ namespace MusicaNobaMVC.Controllers
         }
 
         // GET: Canciones/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit([Bind("IdCancion,Nombre,Artista,Album,AlbumId,Genero,GeneroId")] int? id)
         {
             var cancion = await _context.Canciones.FindAsync(id);
 
+                //ViewData["AlbumId"] = new SelectList(await _context.Albums.OrderBy(a => a.Titulo).ToListAsync(), "IdAlbum", "Titulo");
+                ViewData["GeneroId"] = new SelectList(await _context.Generos.OrderBy(g => g.Nombre).ToListAsync(), "IdGenero", "Nombre");
+                //ViewData["AlbumId"] = new SelectList(_context.Albums, "IdAlbum", "Titulo", cancion.AlbumId);
+                //ViewData["GeneroId"] = new SelectList(_context.Generos, "IdGenero", "Nombre", cancion.GeneroId);
+            
             return View(cancion);
         }
 
@@ -104,6 +111,10 @@ namespace MusicaNobaMVC.Controllers
             {
                 try
                 {
+                    //ViewData["Album"] = new SelectList(_context.Albums, "IdAlbum", "Titulo", cancion.AlbumId);
+                    //ViewData["Genero"] = new SelectList(_context.Generos, "IdGenero", "Nombre", cancion.GeneroId);
+                    ViewData["AlbumId"] = new SelectList(await _context.Albums.OrderBy(a => a.Titulo).ToListAsync(), "IdAlbum", "Titulo");
+                    ViewData["GeneroId"] = new SelectList(await _context.Generos.OrderBy(g => g.Nombre).ToListAsync(), "IdGenero", "Nombre");
                     _context.Update(cancion);
                     await _context.SaveChangesAsync();
                 }
@@ -121,10 +132,8 @@ namespace MusicaNobaMVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // CORREGIDO: Mostrar nombres descriptivos
-            ViewData["Album"] = new SelectList(_context.Albums, "IdAlbum", "Titulo", cancion.AlbumId);
-            ViewData["Genero"] = new SelectList(_context.Generos, "IdGenero", "Nombre", cancion.GeneroId);
-            return View(cancion);
+            
+            return View(new Cancion());
         }
 
         // GET: Canciones/Delete/5
@@ -152,6 +161,7 @@ namespace MusicaNobaMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            
             var cancion = await _context.Canciones.FindAsync(id);
             if (cancion != null)
             {
@@ -166,6 +176,8 @@ namespace MusicaNobaMVC.Controllers
         {
             return _context.Canciones.Any(e => e.IdCancion == id);
         }
+
+
 
     }
 }
