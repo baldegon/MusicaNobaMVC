@@ -1,68 +1,44 @@
-﻿@model IEnumerable<MusicaNobaMVC.Models.Cancion>
+﻿@using MusicaNobaMVC.ViewModels;
+@using MusicaNobaMVC.Models;
+
+@model IEnumerable<CancionListViewModel>
+
 
 @{
     ViewData["Title"] = "MusicaNoba";
 }
 
 <h1>Musica Noba</h1>
+<div>
+    <p>
+        Para ver los albumes, haz click en el siguiente enlace: 
+        <a asp-controller="Album" asp-action="Index">Albums</a>
+    </p>
+    <p>
+        Para ver los generos, haz click en el siguiente enlace: 
+        <a asp-controller="Genero" asp-action="Index">Generos</a>
+    </p>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-bordered table-hover table-striped">
-    <thead>
+<a asp-action="Create" asp-controller="Canciones" >Agregar una Nueva Cancion</a>
+
+
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Artista</th>
+        <th>Album</th>
+        <th>Genero</th>
+    </tr>
+    @foreach(var cancion in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Artista)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Album.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genero.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Album.Anio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Artista)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Album.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genero.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCancion">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCancion">Details</a> |
-                <!--
-
-                <a asp-action="Delete" asp-route-id="@item.IdCancion" onclick="sweetalert2()">Delete</a>
-                <button type="submit" asp-action-id="@item.IdCancion" class="btn btn-primary" onclick="sweetalert2()">Borrar</button>
-                -->
-                <form asp-action="Delete" asp-route-id="@item.IdCancion" onclick="sweetalert2()">
-                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-
-                </form>
-
-
-            </td>
-        </tr>
-}
-    </tbody>
+        <td>@cancion.Nombre</td>
+        <td>@cancion.Artista</td>
+        <td>@cancion.AlbumTitulo</td>
+        <td>@cancion.GeneroNombre</td>
+    </tr>
+    }
 </table>
 
 

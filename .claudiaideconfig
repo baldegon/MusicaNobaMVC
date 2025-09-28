@@ -17,7 +17,7 @@
   "LoopSlideshow": true,
   "MaxHeight": 0,
   "MaxWidth": 0,
-  "Opacity": 1,
+  "Opacity": 0.3,
   "PositionHorizon": 1,
   "PositionVertical": 0,
   "ShuffleSlideshow": false,

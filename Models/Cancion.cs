@@ -6,6 +6,7 @@ namespace MusicaNobaMVC.Models
     {
         [Key]
         public int IdCancion { get; set; }
+        [Required(ErrorMessage = "El Nombre de un genero es obligatorio")]
         public string Nombre { get; set; }
         public string Artista { get; set; }
         public int AlbumId { get; set; }

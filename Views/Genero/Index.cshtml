@@ -1,0 +1,25 @@
+﻿@using MusicaNobaMVC.Models;
+@using MusicaNobaMVC.ViewModels;
+
+@model IEnumerable<GeneroListViewModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "MusicaNoba - Generos";
+}
+
+<table class="table">
+    <tr>
+        <th>Nombre Del Genero</th>
+        <th>Canciones</th>
+    </tr>
+    @foreach (var genero in Model)
+    {
+        <tr>
+            <td>@genero.Nombre</td>
+            <td>@genero.CancionNombre</td>
+        </tr>
+    }
+</table>

@@ -20,7 +20,7 @@
 
     <div class="mb-3">
     <label asp-for="AlbumId" class="form-label">Álbum</label>
-        <input asp-for="Artista" class="form-control" />
+        <input asp-for="Album" class="form-control" />
         <!--
 
         <select asp-for="AlbumId" class="form-select" asp-items="@(ViewData["AlbumId"] as SelectList)">
@@ -32,9 +32,13 @@
 
 <div class="mb-3">
     <label asp-for="GeneroId" class="form-label">Género</label>
+    <input asp-for="Genero" class="form-control" />
+    <!--
+
     <select asp-for="GeneroId" class="form-select" asp-items="@(ViewData["GeneroId"] as SelectList)">
         <option value="">-- Seleccione un género --</option>
     </select>
+    -->
     <span asp-validation-for="GeneroId" class="text-danger"></span>
 </div>
 

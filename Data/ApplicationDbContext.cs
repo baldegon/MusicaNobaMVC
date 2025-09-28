@@ -59,7 +59,7 @@ namespace MusicaNobaMVC.Data
                 .HasOne(c => c.Album)
                 .WithMany(a => a.Canciones)
                 .HasForeignKey(c => c.AlbumId)
-                .HasPrincipalKey(c => c.IdAlbum)
+                .HasPrincipalKey(a => a.IdAlbum)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Genero>()
@@ -69,7 +69,7 @@ namespace MusicaNobaMVC.Data
                 .HasOne(c => c.Genero)
                 .WithMany(g => g.Canciones)
                 .HasForeignKey(c => c.GeneroId)
-                .HasPrincipalKey(c => c.IdGenero)
+                .HasPrincipalKey(a => a.IdGenero)
                 .OnDelete(DeleteBehavior.Restrict);
 
             
