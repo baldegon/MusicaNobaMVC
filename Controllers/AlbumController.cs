@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MusicaNobaMVC.Data;
@@ -36,5 +37,27 @@ namespace MusicaNobaMVC.Controllers
             return View(await album);
         }
 
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Album/Create")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create([Bind("Titulo,Anio")] Album album)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(album)  ;
+            }
+
+            _context.Add(album);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

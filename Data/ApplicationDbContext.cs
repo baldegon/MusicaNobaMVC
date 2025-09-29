@@ -55,22 +55,22 @@ namespace MusicaNobaMVC.Data
             */
 
 
-            modelBuilder.Entity<Cancion>()
-                .HasOne(c => c.Album)
-                .WithMany(a => a.Canciones)
-                .HasForeignKey(c => c.AlbumId)
-                .HasPrincipalKey(a => a.IdAlbum)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Cancion>()
+            //    .HasOne(c => c.Album)
+            //    .WithMany(a => a.Canciones)
+            //    .HasForeignKey(c => c.AlbumId)
+            //    .HasPrincipalKey(a => a.IdAlbum)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Genero>()
-                .HasKey(g => g.IdGenero);
+            //modelBuilder.Entity<Genero>()
+            //    .HasKey(g => g.IdGenero);
             
-            modelBuilder.Entity<Cancion>()
-                .HasOne(c => c.Genero)
-                .WithMany(g => g.Canciones)
-                .HasForeignKey(c => c.GeneroId)
-                .HasPrincipalKey(a => a.IdGenero)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Cancion>()
+            //    .HasOne(c => c.Genero)
+            //    .WithMany(g => g.Canciones)
+            //    .HasForeignKey(c => c.GeneroId)
+            //    .HasPrincipalKey(a => a.IdGenero)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             
         }

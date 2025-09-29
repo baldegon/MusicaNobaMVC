@@ -1,0 +1,53 @@
+﻿@using MusicaNobaMVC.Models;
+@using MusicaNobaMVC.ViewModels;
+
+@model AlbumListViewModel;
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "MusicaNoba - Agregar Albumes";
+}
+
+
+
+<form asp-controller="Album" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label">Titulo del Album</label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Anio" class="form-label">Año De Lanzamiento</label>
+        <input asp-for="Anio" class="form-control" />
+        <span asp-validation-for="Anio" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-3" onclick="sweetalert2()">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2025 - MusicaNobaMVC - <a asp-area="" asp-controller="Cancion" asp-action="Index">Home</a>
+    </div>
+</footer>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+
+        function sweetalert2() {
+            Swal.fire({
+                title: "Agregado!",
+                icon: "success",
+                draggable: true
+            });
+        }
+    </script>
+}

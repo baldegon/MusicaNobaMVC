@@ -34,5 +34,28 @@ namespace MusicaNobaMVC.Controllers
 
             return View(await genero);
         }
+
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Genero/Create")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create([Bind("Nombre")] Genero genero)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(genero);
+            }
+
+            _context.Add(genero);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

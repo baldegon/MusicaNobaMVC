@@ -1,0 +1,44 @@
+﻿@using MusicaNobaMVC.Models;
+@using MusicaNobaMVC.ViewModels;
+
+@model GeneroListViewModel;
+
+@{
+    ViewData["Title"] = "MusicaNoba - Agregar Genero";
+}
+
+
+
+<form asp-controller="Genero" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre del Genero</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-3" onclick="sweetalert2()">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2025 - MusicaNobaMVC - <a asp-area="" asp-controller="Cancion" asp-action="Index">Home</a>
+    </div>
+</footer>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+
+        function sweetalert2() {
+            Swal.fire({
+                title: "Agregado!",
+                icon: "success",
+                draggable: true
+            });
+        }
+    </script>
+}

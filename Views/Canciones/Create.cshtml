@@ -1,4 +1,7 @@
-﻿@model MusicaNobaMVC.Models.Cancion;
+﻿@using MusicaNobaMVC.Models;
+@using MusicaNobaMVC.ViewModels;
+
+@model CancionListViewModel;
 
 @{
     ViewData["Title"] = "Create";
@@ -19,32 +22,26 @@
     </div>
 
     <div class="mb-3">
-    <label asp-for="AlbumId" class="form-label">Álbum</label>
-        <input asp-for="Album" class="form-control" />
-        <!--
-
-        <select asp-for="AlbumId" class="form-select" asp-items="@(ViewData["AlbumId"] as SelectList)">
-            <option value="">-- Seleccione un álbum --</option>
-        </select>
-        -->
+    <label asp-for="AlbumId" class="form-label">Ingresa el ID del Album EJ: (1, 2, 3...)</label>
+        <input asp-for="AlbumId" class="form-control" />
     <span asp-validation-for="AlbumId" class="text-danger"></span>
 </div>
 
 <div class="mb-3">
-    <label asp-for="GeneroId" class="form-label">Género</label>
-    <input asp-for="Genero" class="form-control" />
-    <!--
-
-    <select asp-for="GeneroId" class="form-select" asp-items="@(ViewData["GeneroId"] as SelectList)">
-        <option value="">-- Seleccione un género --</option>
-    </select>
-    -->
+    <label asp-for="GeneroId" class="form-label">Ingresa el ID del Genero EJ: (1, 2, 3...)</label>
+    <input asp-for="GeneroId" class="form-control" />
     <span asp-validation-for="GeneroId" class="text-danger"></span>
 </div>
 
     <button type="submit" class="btn btn-primary m-3" onclick="sweetalert2()">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary">Volver</a>
 </form>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2025 - MusicaNobaMVC - <a asp-area="" asp-controller="Cancion" asp-action="Index">Home</a>
+    </div>
+</footer>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -52,10 +52,26 @@ namespace MusicaNobaMVC.Controllers
             return View( await canciones);
         }
 
-        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
+
             return View();
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Create([Bind("Nombre,Artista,AlbumId,GeneroId")] Cancion cancion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(cancion);
+            }
+
+            _context.Add(cancion);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

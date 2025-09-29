@@ -10,8 +10,12 @@
     ViewData["Title"] = "MusicaNoba - Albumes";
 }
 
+<a asp-action="Create" asp-controller="Album">Agregar Un Nuevo Album</a>
+
+
 <table class="table">
     <tr>
+        <th>Id del Album</th>
         <th>Nombre del Album</th>
         <th>Año de Lanzamiento</th>
         <th>Canciones</th>
@@ -19,6 +23,7 @@
     @foreach (var album in Model)
     {
         <tr>
+            <td>@album.IdAlbum</td>
             <td>@album.Titulo</td>
             <td>@album.Anio</td>
             <td>@album.CancionNombre</td>

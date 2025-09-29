@@ -9,6 +9,8 @@ namespace MusicaNobaMVC.ViewModels
         public string Nombre { get; set; }
         public string Artista { get; set; }
         public string AlbumTitulo { get; set; }
+        public int AlbumId { get; set; }
         public string GeneroNombre { get; set; }
+        public int GeneroId { get; set; }
     }
 }
