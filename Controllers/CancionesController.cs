@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using MusicaNobaMVC.Data;
 using MusicaNobaMVC.Models;
 using MusicaNobaMVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MusicaNobaMVC.Controllers
 {
@@ -32,6 +34,7 @@ namespace MusicaNobaMVC.Controllers
          * canciones.
          * Con los datos obtenidos, los mando al viewmodel para que este los envie a la View
         */
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var canciones = _context.Canciones
@@ -49,6 +52,7 @@ namespace MusicaNobaMVC.Controllers
             return View( await canciones);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             return View();
