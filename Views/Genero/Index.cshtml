@@ -15,14 +15,14 @@
 
 <table class="table">
     <tr>
-        <th>Nombre Del Genero</th>
-        <th>Canciones</th>
+        <th>Id</th>
+        <th>Genero</th>
     </tr>
     @foreach (var genero in Model)
     {
         <tr>
+            <td>@genero.IdGenero</td>
             <td>@genero.Nombre</td>
-            <td>@genero.CancionNombre</td>
         </tr>
     }
 </table>

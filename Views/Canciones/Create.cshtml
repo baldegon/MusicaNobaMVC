@@ -9,29 +9,29 @@
 
 
 <form asp-controller="Canciones" asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="Nombre" class="form-label"></label>
-        <input asp-for="Nombre" class="form-control" />
+    <div class="form-floating mb-3">
+        <label for="floatinginput" asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" placeholder="Nombre de la Cancion" />
         <span asp-validation-for="Nombre" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Artista" class="form-label"></label>
+    <div class="form-floating mb-3">
+        <label for="Artista" asp-for="Artista" class="form-label"></label>
         <input asp-for="Artista" class="form-control" />
         <span asp-validation-for="Artista" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-    <label asp-for="AlbumId" class="form-label">Ingresa el ID del Album EJ: (1, 2, 3...)</label>
+    <div class="form-floating mb-3">
+        <label for="Album" asp-for="AlbumId" class="form-label">Ingresa el ID del Album EJ: (1, 2, 3...)</label>
         <input asp-for="AlbumId" class="form-control" />
-    <span asp-validation-for="AlbumId" class="text-danger"></span>
-</div>
+        <span asp-validation-for="AlbumId" class="text-danger"></span>
+    </div>
 
-<div class="mb-3">
-    <label asp-for="GeneroId" class="form-label">Ingresa el ID del Genero EJ: (1, 2, 3...)</label>
-    <input asp-for="GeneroId" class="form-control" />
-    <span asp-validation-for="GeneroId" class="text-danger"></span>
-</div>
+    <div class="form-floating mb-3">
+        <label for="Genero" asp-for="GeneroId" class="form-label">Ingresa el ID del Genero EJ: (1, 2, 3...)</label>
+        <input asp-for="GeneroId" class="form-control" />
+        <span asp-validation-for="GeneroId" class="text-danger"></span>
+    </div>
 
     <button type="submit" class="btn btn-primary m-3" onclick="sweetalert2()">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary">Volver</a>

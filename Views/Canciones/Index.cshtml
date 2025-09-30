@@ -8,37 +8,49 @@
     ViewData["Title"] = "MusicaNoba";
 }
 
-<h1>Musica Noba</h1>
-<div>
-    <p>
-        Para ver los albumes, haz click en el siguiente enlace: 
-        <a asp-controller="Album" asp-action="Index">Albums</a>
-    </p>
-    <p>
-        Para ver los generos, haz click en el siguiente enlace: 
-        <a asp-controller="Genero" asp-action="Index">Generos</a>
-    </p>
+<div class="container">
+            <h1>Musica Noba</h1>
+            <p>
+                Para ver los albumes, haz click en el siguiente enlace: 
+                <a asp-controller="Album" asp-action="Index">Albums</a>
+            </p>
+        
+            <p>
+                Para ver los generos, haz click en el siguiente enlace: 
+                <a asp-controller="Genero" asp-action="Index">Generos</a>
+            </p>
+        
 </div>
 
-<a asp-action="Create" asp-controller="Canciones" >Agregar una Nueva Cancion</a>
+<div class="badge"> 
+        
+        <a asp-action="Create" asp-controller="Canciones" >Agregar una Nueva Cancion</a>
+</div>
 
 
-<table class="table">
-    <tr>
-        <th>Nombre</th>
-        <th>Artista</th>
-        <th>Album</th>
-        <th>Genero</th>
-    </tr>
-    @foreach(var cancion in Model)
-    {
+<table id="canciones" class="display">
+    <thead>
+
         <tr>
-        <td>@cancion.Nombre</td>
-        <td>@cancion.Artista</td>
-        <td>@cancion.AlbumTitulo</td>
-        <td>@cancion.GeneroNombre</td>
-    </tr>
-    }
+            <th>Nombre</th>
+            <th>Artista</th>
+            <th>Album</th>
+            <th>Genero</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach(var cancion in Model)
+        {
+            <tr>
+                <td>@cancion.Nombre</td>
+                <td>@cancion.Artista</td>
+                <td>@cancion.AlbumTitulo</td>
+                <td>@cancion.GeneroNombre</td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 
@@ -47,6 +59,10 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
+
+        $(document).ready(function (){
+            $("#canciones").DataTable();
+        })
 
         function sweetalert2() {
             Swal.fire({
@@ -68,5 +84,10 @@
             });
             e.preventDefault();
         }
+        
+        new DataTable('#canciones');
+
+
+
     </script>
 }
