@@ -12,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI();
 
@@ -55,7 +56,7 @@ async Task CrearRolesAsync(IServiceProvider serviceProvider)
 {
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    string[] roleNames = { "Admin", "Alumno", "Maestro" };
+    string[] roleNames = { "Admin", "Cliente", "Visitante" };
 
     foreach (var roleName in roleNames)
     {

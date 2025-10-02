@@ -53,7 +53,7 @@ namespace MusicaNobaMVC.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
 
@@ -61,7 +61,7 @@ namespace MusicaNobaMVC.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Nombre,Artista,AlbumId,GeneroId")] Cancion cancion)
         {
             if (!ModelState.IsValid)
@@ -73,5 +73,7 @@ namespace MusicaNobaMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        
     }
 }

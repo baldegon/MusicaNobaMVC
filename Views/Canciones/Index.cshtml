@@ -8,6 +8,7 @@
     ViewData["Title"] = "MusicaNoba";
 }
 
+
 <div class="container">
             <h1>Musica Noba</h1>
             <p>
@@ -23,8 +24,12 @@
 </div>
 
 <div class="badge"> 
+    @if (User.IsInRole("Admin"))
+    {
+ 
+   <a asp-action="Create" asp-controller="Canciones" >Agregar una Nueva Cancion</a>
+    }
         
-        <a asp-action="Create" asp-controller="Canciones" >Agregar una Nueva Cancion</a>
 </div>
 
 

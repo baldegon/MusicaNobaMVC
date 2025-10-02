@@ -10,8 +10,11 @@
     ViewData["Title"] = "MusicaNoba - Generos";
 }
 
-<a asp-action="Create" asp-controller="Genero">Agregar Un Nuevo Genero</a>
 
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" asp-controller="Genero">Agregar Un Nuevo Genero</a>
+}
 
 <table class="table">
     <tr>

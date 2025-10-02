@@ -10,8 +10,11 @@
     ViewData["Title"] = "MusicaNoba - Albumes";
 }
 
-<a asp-action="Create" asp-controller="Album">Agregar Un Nuevo Album</a>
-
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" asp-controller="Album">Agregar Un Nuevo Album</a>
+   
+}
 
 <table class="table">
     <tr>

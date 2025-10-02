@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Framework;
@@ -22,6 +23,7 @@ namespace MusicaNobaMVC.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var album = _context.Albums
@@ -38,7 +40,7 @@ namespace MusicaNobaMVC.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
 
@@ -47,7 +49,7 @@ namespace MusicaNobaMVC.Controllers
 
         [HttpPost]
         [Route("Album/Create")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Titulo,Anio")] Album album)
         {
             if (!ModelState.IsValid)
@@ -59,5 +61,43 @@ namespace MusicaNobaMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var album = await _context.Albums.FindAsync(id);
+            if (album == null)
+            {
+                return NotFound();
+            }
+            return View(album);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Album album)
+        {
+            if (id != album.IdAlbum)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                
+               
+                _context.Update(album);
+                await _context.SaveChangesAsync();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            return View(album);
+        }
+
     }
 }
