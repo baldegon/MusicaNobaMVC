@@ -74,6 +74,82 @@ namespace MusicaNobaMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cancion = await _context.Canciones
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.IdCancion == id);
+
+            if (cancion == null)
+            {
+                return NotFound();
+            }
+
+            await LoadDropDownDataAsync(cancion.AlbumId, cancion.GeneroId);
+
+            return View(cancion);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("IdCancion,Nombre,Artista,AlbumId,GeneroId")] Cancion cancion)
+        {
+            if (id != cancion.IdCancion)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                await LoadDropDownDataAsync(cancion.AlbumId, cancion.GeneroId);
+                return View(cancion);
+            }
+
+            try
+            {
+                _context.Update(cancion);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CancionExists(cancion.IdCancion))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private async Task LoadDropDownDataAsync(int? albumId = null, int? generoId = null)
+        {
+            var albumes = await _context.Albums
+                .AsNoTracking()
+                .ToListAsync();
+            var generos = await _context.Generos
+                .AsNoTracking()
+                .ToListAsync();
+
+            ViewData["AlbumId"] = new SelectList(albumes, nameof(Album.IdAlbum), nameof(Album.Titulo), albumId);
+            ViewData["GeneroId"] = new SelectList(generos, nameof(Genero.IdGenero), nameof(Genero.Nombre), generoId);
+        }
+
+        private bool CancionExists(int id)
+        {
+            return _context.Canciones.Any(e => e.IdCancion == id);
+        }
+
     }
 }
