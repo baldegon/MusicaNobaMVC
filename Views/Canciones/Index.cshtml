@@ -11,14 +11,19 @@
 
 <div class="container">
             <h1>Musica Noba</h1>
+    @if (User.IsInRole("Admin"))
+    {
+    }
+        
             <p>
-                Para ver los albumes, haz click en el siguiente enlace: 
-                <a asp-controller="Album" asp-action="Index">Albums</a>
+                Para ver los albumes, haz click en el siguiente enlace:
+                
+                <a class="fa-solid fa-record-vinyl" asp-controller="Album" asp-action="Index">Albums</a>
             </p>
         
             <p>
                 Para ver los generos, haz click en el siguiente enlace: 
-                <a asp-controller="Genero" asp-action="Index">Generos</a>
+                <a class="fa-solid fa-music" asp-controller="Genero" asp-action="Index">Generos</a>
             </p>
         
 </div>

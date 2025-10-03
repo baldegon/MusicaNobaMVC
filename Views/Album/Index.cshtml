@@ -16,16 +16,23 @@
    
 }
 
+
 <table class="table">
     <tr>
-        <th>Id del Album</th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Id del Album</th>
+        }
         <th>Nombre del Album</th>
         <th>Año de Lanzamiento</th>
     </tr>
     @foreach (var album in Model)
     {
         <tr>
-            <td>@album.IdAlbum</td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>@album.IdAlbum</td>
+            }
             <td>@album.Titulo</td>
             <td>@album.Anio</td>
         </tr>
