@@ -1,0 +1,31 @@
+@model MusicaNobaMVC.Models.Album
+
+@{
+    ViewData["Title"] = "Editar Álbum";
+}
+
+<h1>Editar Álbum</h1>
+
+<form asp-controller="Album" asp-action="Edit" asp-route-id="@Model.IdAlbum" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdAlbum" />
+
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label">Título del Álbum</label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Anio" class="form-label">Año de Lanzamiento</label>
+        <input asp-for="Anio" class="form-control" />
+        <span asp-validation-for="Anio" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-3">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -58,5 +58,66 @@ namespace MusicaNobaMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var genero = await _context.Generos
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.IdGenero == id);
+
+            if (genero == null)
+            {
+                return NotFound();
+            }
+
+            return View(genero);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("IdGenero,Nombre")] Genero genero)
+        {
+            if (id != genero.IdGenero)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(genero);
+            }
+
+            try
+            {
+                _context.Update(genero);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GeneroExists(genero.IdGenero))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool GeneroExists(int id)
+        {
+            return _context.Generos.Any(g => g.IdGenero == id);
+        }
     }
 }

@@ -63,6 +63,8 @@ namespace MusicaNobaMVC.Controllers
         }
 
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,7 +72,9 @@ namespace MusicaNobaMVC.Controllers
                 return NotFound();
             }
 
-            var album = await _context.Albums.FindAsync(id);
+            var album = await _context.Albums
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.IdAlbum == id);
             if (album == null)
             {
                 return NotFound();
@@ -79,6 +83,7 @@ namespace MusicaNobaMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Album album)
         {
@@ -87,16 +92,34 @@ namespace MusicaNobaMVC.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                
-               
+                return View(album);
+            }
+
+            try
+            {
                 _context.Update(album);
                 await _context.SaveChangesAsync();
-                
-                return RedirectToAction(nameof(Index));
             }
-            return View(album);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AlbumExists(album.IdAlbum))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool AlbumExists(int id)
+        {
+            return _context.Albums.Any(a => a.IdAlbum == id);
         }
 
         [HttpGet]
