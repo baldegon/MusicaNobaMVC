@@ -12,8 +12,8 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <a asp-action="Create" asp-controller="Album">Agregar Un Nuevo Album</a>
-   
+    <a class="fa-solid fa-plus" asp-action="Create" asp-controller="Album">Agregar Un Nuevo Album</a>
+    <a class="fa-solid fa-pencil" asp-action="Edit" asp-controller="Album">Editar Album</a>  
 }
 
 
