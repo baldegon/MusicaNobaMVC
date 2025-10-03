@@ -18,13 +18,19 @@
 
 <table class="table">
     <tr>
-        <th>Id</th>
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Id</th>
+        }
         <th>Genero</th>
     </tr>
     @foreach (var genero in Model)
     {
         <tr>
+            @if (User.IsInRole("Admin"))
+            {
             <td>@genero.IdGenero</td>
+            }
             <td>@genero.Nombre</td>
         </tr>
     }

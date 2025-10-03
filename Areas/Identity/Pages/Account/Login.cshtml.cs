@@ -106,13 +106,12 @@ namespace MusicaNobaMVC.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(
-                    user, 
+                    Input.Email, 
                     Input.Password, 
                     Input.RememberMe, 
                     lockoutOnFailure: false);

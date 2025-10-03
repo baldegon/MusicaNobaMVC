@@ -74,6 +74,19 @@ namespace MusicaNobaMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var cancion = await _context.Canciones
+                .Include(c => c.Album)
+                .Include(c => c.Genero)
+                .FirstOrDefaultAsync(m => m.IdCancion == id);
+
+            if (cancion == null) return NotFound();
+
+            return View(cancion);
+        }
         
     }
 }
